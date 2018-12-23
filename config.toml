@@ -17,13 +17,8 @@ disableKinds = ["page", "404", "taxonomy", "taxonomyTerm", "RSS", "sitemap"]
 
 [languages]
 [languages.en]
-contentDir = "content/en"
-baseURL = "/en"
 languageName = "English"
 weight = 1
-
-[languages.ca]
-contentDir = "content/ca"
-baseURL = "/ca"
-languageName = "Català"
+[languages.ja]
+languageName = "Japanese"
 weight = 2
