@@ -95,7 +95,7 @@ This command creates a cube having dimensions as specified by *HalfWidth*, *Half
 
 #### Cube representation
 
-The Cube command is equivalent to a series of AddVertex and AddFace commands, which you need to account for when using other commands in the same CreateMeshBuilder section. The details on what the Cube command does are available [here](/objects/native/objects_cubecylinder.html).
+The Cube command is equivalent to a series of AddVertex and AddFace commands, which you need to account for when using other commands in the same CreateMeshBuilder section. The details on what the Cube command does are available [here](/objects/native/cubecylinder.html).
 
 {{% /notice %}}
 
@@ -120,7 +120,7 @@ The number of vertices *n* will usually suffice to be 6 or 8 when only small rad
 
 #### Cylinder representation
 
-The Cylinder command is equivalent to a series of AddVertex and AddFace commands, which you need to account for when using other commands in the same CreateMeshBuilder section. The details on what the Cylinder command does are available [here](/objects/native/objects_cubecylinder.html).
+The Cylinder command is equivalent to a series of AddVertex and AddFace commands, which you need to account for when using other commands in the same CreateMeshBuilder section. The details on what the Cylinder command does are available [here](/objects/native/cubecylinder.html).
 
 {{% /notice %}}
 
