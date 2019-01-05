@@ -6,7 +6,9 @@ branches:
     - master
 
 env:
-  - HUGO_VERSION=0.53
+  global:
+    - HUGO_VERSION=0.53
+    - secure: dIIbSDwXdjFYHdvwaqT/UVW1RimjYIOwnGuIl2fegtW5os0UCbHsPi6qEwUktFIzZJtwZywdxRWePZvwLMWV0y51ioAlu2HR38zB8yDVmkgm//qXMtxYQikEAG5LWz8Jubn8p2+J1w7cOMMxsZ2Kfo+odQx3RyBs6EKj2STFmg9Jy6uihZrZySYnz7KhxhogF7kRCQLMJJ8ca7LbmZ0Hy2eq8DQfCZsN1VUwGPYZ5RJatu8eq1bZja0YnQkqU/buOV2lAnQ5bAKJXnTxtwcKdX+Ev6p7heInOma9oN2EP9Y1fBikOX5Wkewr7Dc0gRVENiQnRuphSClm286qaBaVsZaOUCtnwEPyBbdYSvY2nFHacMd8pV/0NIsZgpv6N8gIHSmLo07gGZVCXEekwponAT1B43ITorDFfR0f0BUWzkEJQElQUPbjPWAObVSLnI9NQtTDZSRF99/Hs49eoVfqiJTEQhW3bzVixk57OCaUvH8yIstiGy1YHAKrjA2K6pWuNW5sMWhTmT07DJ/RRSSZ5NtsRQa48uGwkk2N2tvHuPjEfEbOxo6dufuTveaUTqonTK2E7ocTq8XWXfjuKv//S9vNpYevN6KT2dsk6p2G0W8JV8HEyqViHEJUartALd0iTyxCAkF/XiWAGMBEyizTKX48VGfltgKSE0urBHjvjOE=
 
 install: true
 
@@ -15,12 +17,15 @@ before_script:
   - sudo dpkg -i hugo_${HUGO_VERSION}_Linux-64bit.deb
 
 script:
+  - git clone https://github.com/$TRAVIS_REPO_SLUG.git $TRAVIS_REPO_SLUG
+  - cd $TRAVIS_REPO_SLUG
+  - git checkout -qf $TRAVIS_COMMIT
   - git config --global user.email "travis@travis-ci.org"
   - git config --global user.name "Travis CI"
   - git checkout translate
   - git branch
   - git merge master
   - hugo -v
-  - git add .
-  - git commit -a -m "Travis build: ${TRAVIS_BUILD_NUMBER}"
-  - git push --progress "origin" translate:translate
+  - git add -A -f
+  - git commit -m "Travis build $TRAVIS_BUILD_NUMBER"
+  - git push https://${GITHUB_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git translate
