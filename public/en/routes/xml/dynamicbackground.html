@@ -3,9 +3,11 @@
   <head>
     <title>openBVE Documentation</title>
     <link rel="stylesheet" href="../../css/theme.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css">
     <link rel="icon" href="../../favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script type="text/javascript" src="../../script/script.js"></script>
     <meta name="generator" content="Hugo 0.53" />
 
@@ -291,14 +293,10 @@
     </div>
 
     <div id="language-menu">
-  <ul class="language-selector">
-    <li id="en">
-      English
-    </li>
-    <li id="ja">
-      日本語
-    </li>
-  </ul>
+  <select class="language-selector" name="state" style="width:100px;">
+    <option value="en">English</option>
+    <option value="ja">日本語</option>
+  </select>
 </div>
 
 
