@@ -326,9 +326,12 @@
 
 <p>Please note that Object Bender always interprets files as UTF-8 unless a byte order mark indicates a different Unicode encoding. Non-Unicode encodings are not supported.</p>
 
-<p>Supported object file formats:<br />
-● B3D<br />
-● CSV</p>
+<p>Supported object file formats:</p>
+
+<ul>
+<li>B3D</li>
+<li>CSV</li>
+</ul>
 
 <h2 id="command-line-arguments">■ Command-line arguments</h2>
 
@@ -409,9 +412,7 @@
        <td width="16" valign="top">▶</td>
        <td bgcolor="#D4D8FF" style="border: 1px dashed;">
          <font style="font-family: monospace">
-         <pre><code>ObjectBender input.csv output.csv /n=25 /s=1 /b=25 /r=600
-</code></pre>
-
+         <p style='display:inline;'>ObjectBender input.csv output.csv /n=25 /s=1 /b=25 /r=600
          </font>
        </td>
     </tr>
@@ -468,32 +469,28 @@
        <td width="16" valign="top">▶</td>
        <td bgcolor="#D4D8FF" style="border: 1px dashed;">
          <font style="font-family: monospace">
-         <pre><code>; left rail
-CreateMeshBuilder
-AddVertex,-0.7775,0,0
-AddVertex,-0.7775,0,5
-AddVertex,-0.7175,0,5
-AddVertex,-0.7175,0,0
-AddFace,0,1,2,3
-
-; right rail
-CreateMeshBuilder
-AddVertex,0.7775,0,0
-AddVertex,0.7775,0,5
-AddVertex,0.7175,0,5
-AddVertex,0.7175,0,0
-AddFace,3,2,1,0
-
-; ballast
-CreateMeshBuilder
-AddVertex,-1,-0.2,0
-AddVertex,-1,-0.2,5
-AddVertex,1,-0.2,5
-AddVertex,1,-0.2,0
-AddFace,0,1,2,3
+         <p style='display:inline;'>; left rail<br />
+CreateMeshBuilder<br />
+AddVertex,-0.7775,0,0<br />
+AddVertex,-0.7775,0,5<br />
+AddVertex,-0.7175,0,5<br />
+AddVertex,-0.7175,0,0<br />
+AddFace,0,1,2,3<br />
+<br/>; right rail<br />
+CreateMeshBuilder<br />
+AddVertex,0.7775,0,0<br />
+AddVertex,0.7775,0,5<br />
+AddVertex,0.7175,0,5<br />
+AddVertex,0.7175,0,0<br />
+AddFace,3,2,1,0<br />
+<br/>; ballast<br />
+CreateMeshBuilder<br />
+AddVertex,-1,-0.2,0<br />
+AddVertex,-1,-0.2,5<br />
+AddVertex,1,-0.2,5<br />
+AddVertex,1,-0.2,0<br />
+AddFace,0,1,2,3<br />
 SetColor,150,125,100
-</code></pre>
-
          </font>
        </td>
     </tr>
@@ -527,20 +524,18 @@ Radius: 600</p>
        <td width="16" valign="top">▶</td>
        <td bgcolor="#D4D8FF" style="border: 1px dashed;">
          <font style="font-family: monospace">
-         <pre><code>; ballast
-CreateMeshBuilder
-AddVertex,-1,-0.2,0
-AddVertex,-1,-0.2,5
-AddVertex,1,-0.2,5
-AddVertex,1,-0.2,0
-AddFace,0,1,2,3
-LoadTexture,ballast.png
-SetTextureCoordinates,0,0,0
-SetTextureCoordinates,1,0,1
-SetTextureCoordinates,2,1,1
+         <p style='display:inline;'>; ballast<br />
+CreateMeshBuilder<br />
+AddVertex,-1,-0.2,0<br />
+AddVertex,-1,-0.2,5<br />
+AddVertex,1,-0.2,5<br />
+AddVertex,1,-0.2,0<br />
+AddFace,0,1,2,3<br />
+LoadTexture,ballast.png<br />
+SetTextureCoordinates,0,0,0<br />
+SetTextureCoordinates,1,0,1<br />
+SetTextureCoordinates,2,1,1<br />
 SetTextureCoordinates,3,1,0
-</code></pre>
-
          </font>
        </td>
     </tr>
@@ -563,20 +558,18 @@ SetTextureCoordinates,3,1,0
        <td width="16" valign="top">▶</td>
        <td bgcolor="#D4D8FF" style="border: 1px dashed;">
          <font style="font-family: monospace">
-         <pre><code>; ballast
-CreateMeshBuilder
-AddVertex,-1,-0.2,0
-AddVertex,-1,-0.2,5
-AddVertex,1,-0.2,5
-AddVertex,1,-0.2,0
-AddFace,0,1,2,3
-LoadTexture,ballast.png
-SetTextureCoordinates,0,0,0.0
-SetTextureCoordinates,1,0,0.2
-SetTextureCoordinates,2,1,0.2
+         <p style='display:inline;'>; ballast<br />
+CreateMeshBuilder<br />
+AddVertex,-1,-0.2,0<br />
+AddVertex,-1,-0.2,5<br />
+AddVertex,1,-0.2,5<br />
+AddVertex,1,-0.2,0<br />
+AddFace,0,1,2,3<br />
+LoadTexture,ballast.png<br />
+SetTextureCoordinates,0,0,0.0<br />
+SetTextureCoordinates,1,0,0.2<br />
+SetTextureCoordinates,2,1,0.2<br />
 SetTextureCoordinates,3,1,0.0
-</code></pre>
-
          </font>
        </td>
     </tr>
@@ -599,20 +592,18 @@ SetTextureCoordinates,3,1,0.0
        <td width="16" valign="top">▶</td>
        <td bgcolor="#D4D8FF" style="border: 1px dashed;">
          <font style="font-family: monospace">
-         <pre><code>; ballast
-CreateMeshBuilder
-AddVertex,-1,-0.2,0
-AddVertex,-1,-0.2,5
-AddVertex,1,-0.2,5
-AddVertex,1,-0.2,0
-AddFace,0,1,2,3
-LoadTexture,ballast.png
-SetTextureCoordinates,0,0,0.0 ; {Y=0.2}
-SetTextureCoordinates,1,0,0.2 ; {Y=0.2}
-SetTextureCoordinates,2,1,0.2 ; {Y=0.2}
+         <p style='display:inline;'>; ballast<br />
+CreateMeshBuilder<br />
+AddVertex,-1,-0.2,0<br />
+AddVertex,-1,-0.2,5<br />
+AddVertex,1,-0.2,5<br />
+AddVertex,1,-0.2,0<br />
+AddFace,0,1,2,3<br />
+LoadTexture,ballast.png<br />
+SetTextureCoordinates,0,0,0.0 ; {Y=0.2}<br />
+SetTextureCoordinates,1,0,0.2 ; {Y=0.2}<br />
+SetTextureCoordinates,2,1,0.2 ; {Y=0.2}<br />
 SetTextureCoordinates,3,1,0.0 ; {Y=0.2}
-</code></pre>
-
          </font>
        </td>
     </tr>
@@ -639,9 +630,7 @@ SetTextureCoordinates,3,1,0.0 ; {Y=0.2}
        <td width="16" valign="top">▶</td>
        <td bgcolor="#D4D8FF" style="border: 1px dashed;">
          <font style="font-family: monospace">
-         <pre><code>ObjectBender segment.csv right_curve_600.csv /n=5 /s=5 /b=25 /r=600
-</code></pre>
-
+         <p style='display:inline;'>ObjectBender segment.csv right_curve_600.csv /n=5 /s=5 /b=25 /r=600
          </font>
        </td>
     </tr>
@@ -664,14 +653,12 @@ SetTextureCoordinates,3,1,0.0 ; {Y=0.2}
        <td width="16" valign="top">▶</td>
        <td bgcolor="#D4D8FF" style="border: 1px dashed;">
          <font style="font-family: monospace">
-         <pre><code>AddVertex,-0.03,5,0
-AddVertex,-0.03,5,25
-AddVertex,0.03,5,25
-AddVertex,0.03,5,0
-AddFace,3,2,1,0
+         <p style='display:inline;'>AddVertex,-0.03,5,0<br />
+AddVertex,-0.03,5,25<br />
+AddVertex,0.03,5,25<br />
+AddVertex,0.03,5,0<br />
+AddFace,3,2,1,0<br />
 SetColor,0,0,0
-</code></pre>
-
          </font>
        </td>
     </tr>
@@ -694,9 +681,7 @@ SetColor,0,0,0
        <td width="16" valign="top">▶</td>
        <td bgcolor="#D4D8FF" style="border: 1px dashed;">
          <font style="font-family: monospace">
-         <pre><code>ObjectBender wire.csv right_curve_600.csv /n=1 /s=25 /b=25 /r=600 /a
-</code></pre>
-
+         <p style='display:inline;'>ObjectBender wire.csv right_curve_600.csv /n=1 /s=25 /b=25 /r=600 /a
          </font>
        </td>
     </tr>
@@ -719,10 +704,8 @@ SetColor,0,0,0
        <td width="16" valign="top">▶</td>
        <td bgcolor="#D4D8FF" style="border: 1px dashed;">
          <font style="font-family: monospace">
-         <pre><code>ObjectBender segment.csv right_curve_600.csv /n=5 /s=5 /b=25 /r=600
+         <p style='display:inline;'>ObjectBender segment.csv right_curve_600.csv /n=5 /s=5 /b=25 /r=600<br />
 ObjectBender wire.csv right_curve_600.csv /n=1 /s=25 /b=25 /r=600 /a
-</code></pre>
-
          </font>
        </td>
     </tr>
@@ -745,20 +728,18 @@ ObjectBender wire.csv right_curve_600.csv /n=1 /s=25 /b=25 /r=600 /a
        <td width="16" valign="top">▶</td>
        <td bgcolor="#D4D8FF" style="border: 1px dashed;">
          <font style="font-family: monospace">
-         <pre><code>; 300m left
-ObjectBender segment.csv left_curve_300.csv /n=5 /s=5 /b=25 /r=-300
-ObjectBender wire.csv left_curve_300.csv /n=1 /s=25 /b=25 /r=-300 /a
-; 300m right
-ObjectBender segment.csv right_curve_300.csv /n=5 /s=5 /b=25 /r=300
-ObjectBender wire.csv right_curve_300.csv /n=1 /s=25 /b=25 /r=300 /a
-; 600m left
-ObjectBender segment.csv left_curve_600.csv /n=5 /s=5 /b=25 /r=-600
-ObjectBender wire.csv left_curve_600.csv /n=1 /s=25 /b=25 /r=-600 /a
-; 600m right
-ObjectBender segment.csv right_curve_600.csv /n=5 /s=5 /b=25 /r=600
+         <p style='display:inline;'>; 300m left<br />
+ObjectBender segment.csv left_curve_300.csv /n=5 /s=5 /b=25 /r=-300<br />
+ObjectBender wire.csv left_curve_300.csv /n=1 /s=25 /b=25 /r=-300 /a<br />
+; 300m right<br />
+ObjectBender segment.csv right_curve_300.csv /n=5 /s=5 /b=25 /r=300<br />
+ObjectBender wire.csv right_curve_300.csv /n=1 /s=25 /b=25 /r=300 /a<br />
+; 600m left<br />
+ObjectBender segment.csv left_curve_600.csv /n=5 /s=5 /b=25 /r=-600<br />
+ObjectBender wire.csv left_curve_600.csv /n=1 /s=25 /b=25 /r=-600 /a<br />
+; 600m right<br />
+ObjectBender segment.csv right_curve_600.csv /n=5 /s=5 /b=25 /r=600<br />
 ObjectBender wire.csv right_curve_600.csv /n=1 /s=25 /b=25 /r=600 /a
-</code></pre>
-
          </font>
        </td>
     </tr>
