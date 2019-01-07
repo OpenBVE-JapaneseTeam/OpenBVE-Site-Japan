@@ -8,7 +8,7 @@ branches:
 env:
   global:
     - HUGO_VERSION=0.53
-    - secure: dIIbSDwXdjFYHdvwaqT/UVW1RimjYIOwnGuIl2fegtW5os0UCbHsPi6qEwUktFIzZJtwZywdxRWePZvwLMWV0y51ioAlu2HR38zB8yDVmkgm//qXMtxYQikEAG5LWz8Jubn8p2+J1w7cOMMxsZ2Kfo+odQx3RyBs6EKj2STFmg9Jy6uihZrZySYnz7KhxhogF7kRCQLMJJ8ca7LbmZ0Hy2eq8DQfCZsN1VUwGPYZ5RJatu8eq1bZja0YnQkqU/buOV2lAnQ5bAKJXnTxtwcKdX+Ev6p7heInOma9oN2EP9Y1fBikOX5Wkewr7Dc0gRVENiQnRuphSClm286qaBaVsZaOUCtnwEPyBbdYSvY2nFHacMd8pV/0NIsZgpv6N8gIHSmLo07gGZVCXEekwponAT1B43ITorDFfR0f0BUWzkEJQElQUPbjPWAObVSLnI9NQtTDZSRF99/Hs49eoVfqiJTEQhW3bzVixk57OCaUvH8yIstiGy1YHAKrjA2K6pWuNW5sMWhTmT07DJ/RRSSZ5NtsRQa48uGwkk2N2tvHuPjEfEbOxo6dufuTveaUTqonTK2E7ocTq8XWXfjuKv//S9vNpYevN6KT2dsk6p2G0W8JV8HEyqViHEJUartALd0iTyxCAkF/XiWAGMBEyizTKX48VGfltgKSE0urBHjvjOE=
+    - secure: U3UxoXoDYAKYY79xv6J+706BuceAgfY13aca2H/AHhPnP1lUXuseywS0kJZeo5OESGCmxLgYpP6i8N3jIrKPgRmzVDLbZR/MIiT/3DNzVmb6j7jesp7V0YFfHD3VAbN4wIL7XEvl9EA6oqgybINW8+J6pdObBhfOgHM/oEv2a+tPWLRogT2Z8670U/zxoeM2BieqtcqkMkWH+G+JvdSjmPUm/lT6lmtl2KYhjIjLLp3ZvpGzl42fpjAl/v2PSUDvABsI9qxsAz/xOsfHdnWT/QZuglsku7z9CRTDQbpI5yC09mkEy0rg7DiYvH2u8zHssAXOjmgD1RQBtx9aSGmwCZutE+DEPrFXnIstwQMQ2++IL+XsKIYmrnm9QqQW4HAWGliKlv3UFAT0UPUjgNQHWMbWPWg39M+wIWLDr3xObHFY4oFRpIwBfdJ8tKqFLGgNTcqrBGMqE9yCZ2ywqaFYrXqzlhp/4/TS9N6Cpa1zn0yeWzHn+DSPqPujrCmCrjZLI+za5mpGNdPl01ijrA5NZaoU5kGSu8rn4ueQOkm8QwhvucbJ8ozB5BKxYxP3gMnPgXLj4fLbjb+IV38+FpbSX3dNYTcXxvsKBsTZQMBrHY+Y+Itc1aKtZ9MyOmDuXEzncdb87AiXbnNHrLmWFs9PIHWlydhFckEd6hC/PeNruAA=
 
 install: true
 
@@ -20,8 +20,8 @@ script:
   - git clone https://github.com/$TRAVIS_REPO_SLUG.git $TRAVIS_REPO_SLUG
   - cd $TRAVIS_REPO_SLUG
   - git checkout -qf $TRAVIS_COMMIT
-  - git config --global user.email "travis@travis-ci.org"
-  - git config --global user.name "Travis CI"
+  - git config --global user.email "46429655+S520-BOT@users.noreply.github.com"
+  - git config --global user.name "S520-BOT"
   - git checkout translate
   - git branch
   - git merge master
