@@ -17,6 +17,9 @@ IRuntimeとIRuntimeTrainには互換性がありません。IRuntimeTrainとIRun
 
 プラグインがロードされると、次の関数がこの順序で呼び出されます。
 
+- IRuntimeRoute
+  - Load
+  - Initialize
 - IRuntimeTrain
   - Load
   - SetVehicleSpecs
@@ -24,9 +27,6 @@ IRuntimeとIRuntimeTrainには互換性がありません。IRuntimeTrainとIRun
   - SetPower
   - SetBrake
   - SetReverser
-- IRuntimeRoute
-  - Load
-  - Initialize
 
 毎フレームに、次の関数がこの順序で呼び出されます。
 
@@ -34,6 +34,13 @@ IRuntimeとIRuntimeTrainには互換性がありません。IRuntimeTrainとIRun
   - Elapse
 - IRuntimeTrain
   - Elapse
+
+次の関数はいつでも次の順序で呼び出されます。
+
+- IRuntimeRoute
+  - SetBeacon
+- IRuntimeTrain
+  - SetBeacon
 
 次の関数はいつでも呼び出されることができます。
 
@@ -46,7 +53,6 @@ IRuntimeとIRuntimeTrainには互換性がありません。IRuntimeTrainとIRun
   - HornBlow
   - DoorChange
   - SetSignal
-  - SetBeacon
   - PerformAI
 
 (S520注: 現時点ではこれらの関数の前に路線プラグインは呼び出されません。実装した方がよい場合はご相談ください。)
@@ -148,7 +154,7 @@ UseTransmitter(new TxEventArgs(sendData));
 
 ------
 
-**void Elapse(ElapseDataRoute data)**
+**void Elapse(ElapseDataRoute data, out byte[] sendData)**
 
 この関数は全てのフレームで呼ばれます。路線の現在の状態を車両プラグインに通知し、信号インデックスを設定できます。加えて、車両プラグインへデータを送ることができます。
 
@@ -156,9 +162,9 @@ UseTransmitter(new TxEventArgs(sendData));
 
 {{% table-nonheader %}}
 
-| ElapseDataRoute | data | 本体からプラグインに渡されたデータ |
-| --------------- | ---- | ---------------------------------- |
-|                 |      |                                    |
+| ElapseDataRoute | data     | 本体からプラグインに渡されたデータ     |
+| --------------- | -------- | -------------------------------------- |
+| byte[]          | sendData | 車両プラグインに送るデータを設定する。 |
 
 {{% /table-nonheader %}}
 
@@ -166,9 +172,9 @@ ElapseDataRoute (クラス):
 
 {{% table-nonheader %}}
 
-| byte[]    | SendData | 車両プラグインに送るデータを設定する。 |
-| --------- | -------- | -------------------------------------- |
-| Section[] | Sections | 路線上の全ての閉塞の情報               |
+| Section[] | Sections | 路線上の全ての閉塞の情報 |
+| --------- | -------- | ------------------------ |
+|           |          |                          |
 
 {{% /table-nonheader %}}
 
@@ -193,6 +199,43 @@ SectionAspect (構造体)
 {{% /table-nonheader %}}
 
 (S520注: クラスや構造体のメンバーについては仮のものです。取得可能にした方がよいものがあれば、ご指摘ください。)
+
+------
+
+**void SetBeacon(BeaconDataEx data)**
+
+この関数は車両の先頭がBeacon上を通過する際に呼び出され、Beaconの種類とオプションを設定できます。
+
+引数:
+
+{{% table-nonheader %}}
+
+| BeaconDataEx | data | Beaconデータ |
+| ------------ | ---- | ------------ |
+|              |      |              |
+
+{{% /table-nonheader %}}
+
+BeaconDataEx (クラス):
+
+{{% table-nonheader %}}
+
+| int        | Type     | Beaconの種類を取得および設定する。                       |
+| ---------- | -------- | -------------------------------------------------------- |
+| int        | Optional | Beaconが送信するオプションのデータを取得および設定する。 |
+| SignalData | Signal   | Beaconに紐づけられている閉塞を取得する。                 |
+
+{{% /table-nonheader %}}
+
+SignalData (クラス):
+
+{{% table-nonheader %}}
+
+| int    | Aspect   | 閉塞の信号インデックスを取得する。 |
+| ------ | -------- | ---------------------------------- |
+| double | Distance | 閉塞までの距離を取得する。         |
+
+{{% /table-nonheader %}}
 
 ------
 
