@@ -3,19 +3,19 @@ title: "Train plugin API (IRuntimeTrain) and Route plugin API (IRuntimeRoute)"
 hidden: true
 ---
 
-これは車両プラグインと路線プラグインのドキュメントです。車両プラグインを作成するためには名前空間OpenBveApi.RuntimeからIRuntimeTrainインターフェースを実装します。路線プラグインを作成するためには名前空間OpenBveApi.RuntimeからIRuntimeRouteインターフェースを実装します。
+This is a document of train plugin and route plugin. To create a train plugin, implement the IRuntimeTrain interface from the namespace OpenBveApi.Runtime. To create a route plugin, implement the IRuntimeRoute interface from the namespace OpenBveApi.Runtime.
 
 {{% warning %}}
 
 #### IRuntime vs. IRuntimeTrain and IRuntimeRoute
 
-IRuntimeとIRuntimeTrainには互換性がありません。IRuntimeTrainとIRuntimeRouteはopenBVE 1.5.4.X以上で使用可能です。以前のバージョンで読み込むとエラーが発生するので注意してください。
+IRuntime and IRuntimeTrain are not compatible. IRuntimeTrain and IRuntimeRoute can be used with openBVE 1.5.4.x or later. Please be aware that an error will occur when reading in the previous version.
 
 {{% /warning %}}
 
 ## ■ Overview
 
-プラグインがロードされると、次の関数がこの順序で呼び出されます。
+When the plug-in is loaded, the following functions are called in this order:
 
 - IRuntimeRoute
   - Load
@@ -28,21 +28,21 @@ IRuntimeとIRuntimeTrainには互換性がありません。IRuntimeTrainとIRun
   - SetBrake
   - SetReverser
 
-毎フレームに、次の関数がこの順序で呼び出されます。
+In every frame, the following functions are called in this order:
 
 - IRuntimeRoute
   - Elapse
 - IRuntimeTrain
   - Elapse
 
-次の関数はいつでも次の順序で呼び出されます。
+The following functions are called at any time in the following order:
 
 - IRuntimeRoute
   - SetBeacon
 - IRuntimeTrain
   - SetBeacon
 
-次の関数はいつでも呼び出されることができます。
+The following functions can be called at any time.
 
 - IRuntimeTrain
   - SetPower
@@ -55,11 +55,9 @@ IRuntimeとIRuntimeTrainには互換性がありません。IRuntimeTrainとIRun
   - SetSignal
   - PerformAI
 
-(S520注: 現時点ではこれらの関数の前に路線プラグインは呼び出されません。実装した方がよい場合はご相談ください。)
+NOTE by S520: Route plugins are not called before these functions at the moment. Please consult me if it is better to implement.
 
-IRuntimeTrainのイベント *Transmitter* は任意の関数内で呼び出すことができます。このイベントはIRuntimeRouteの関数 *Receiver* を呼び出します。
-
-プラグインがアンロードされると、次の関数がこの順序で呼び出されます。
+When the plug-in is unloaded, the following functions are called in this order:
 
 - IRuntimeTrain
   - Unload
@@ -68,21 +66,21 @@ IRuntimeTrainのイベント *Transmitter* は任意の関数内で呼び出す�
 
 ## ■ Function calls - IRuntimeTrain
 
-IRuntimeTrainはIRuntimeを拡張したインターフェースのため、ここでは異なる関数のみ一覧とその動作について説明します。記述されていない関数はIRuntimeと同様ですので、[そちら]({{< ref "/plugins/iruntime/_index.md" >}})を参照してください。
+Since IRuntimeTrain is an interface that extends IRuntime, here is a list of only different functions and their operation. Functions not described are the same as IRuntime, so please see here.
 
 ------
 
 **void Elapse(ElapseData data, byte[] recieveData)**
 
-この関数は全てのフレームで呼ばれます。電車の現在の状態を車両プラグインに通知し、ハンドルの状態を設定できます。加えて、路線プラグインからのデータを受け取ることができます。
+This function is called in all frames. It sends the current state of the train to the vehicle plug-in and set the state of the steering wheel. In addition, it can receive data from the route plugin.
 
-引数:
+arguments:
 
 {{% table-nonheader %}}
 
-| ElapseData | data        | 本体からプラグインに渡されたデータ           |
+| ElapseData | data        | Data passed from the OpenBVE to the plug-in  |
 | ---------- | ----------- | -------------------------------------------- |
-| byte[]     | recieveData | 路線プラグインから受け取るデータを取得する。 |
+| byte[]     | recieveData | Acquire data received from the route plug-in |
 
 {{% /table-nonheader %}}
 
@@ -90,21 +88,21 @@ IRuntimeTrainはIRuntimeを拡張したインターフェースのため、こ�
 
 **event EventHandler\<TxEventArgs> Transmitter**
 
-これはIRuntimeRouteの関数 *Receiver* を呼び出します。
+This calls the IRuntimeRoute function Receiver.
 
-TxEventArgs (クラス):
+TxEventArgs (class):
 
 {{% table-nonheader %}}
 
-| byte[] | SendData | 路線プラグインに送るデータを設定する。 |
-| ------ | -------- | -------------------------------------- |
-|        |          |                                        |
+| byte[] | SendData | Set data to be sent to the route plug-in. |
+| ------ | -------- | ----------------------------------------- |
+|        |          |                                           |
 
 {{% /table-nonheader %}}
 
 <br/>
 
-{{% code "実装例" %}}
+{{% code "Implementation example" %}}
 
 ```c#
 public event EventHandler<TxEventArgs> Transmitter;
@@ -115,7 +113,7 @@ protected virtual void UseTransmitter(TxEventArgs e) {
     }
 }
 
-// 使用方法
+// usage
 using System;
 using System.Linq;
 bool A = true;
@@ -128,112 +126,112 @@ UseTransmitter(new TxEventArgs(sendData));
 
 ## ■ Function calls - IRuntimeRoute
 
-以下は全ての関数の一覧とその動作に関する説明です。
+The following is a list of all functions and explanations on their operation.
 
 ------
 
 **bool Load()**
 
-この関数はプラグインがロードされた後に最初に呼び出されます。
+This function will be called the first time after the plugin is loaded.
 
-(S520注: 引数については仮のものです。ロード時に取得した方がよいものがあれば、ご指摘ください。)
+NOTE by S520: The argument is temporary. Please point out if there is something better to get at the time of loading.
 
 ------
 
 **void Unload()**
 
-この関数はプラグインがアンロードされる前に呼び出される最後のものです。
+This function is the last one to be called before the plugin is unloaded.
 
 ------
 
 **void Initialize()**
 
-この関数は *Load* の後に呼び出され、プラグインを初期化します。ユーザーが「駅へジャンプ」機能を使用する際に、この関数は車両を新しい場所へ移動する前にも呼び出されます。
+This function is called after Load to initialize the plugin. When the user uses the "Jump to Station" function, this function will also be called before moving the vehicle to a new location.
 
-(S520注: 引数については仮のものです。初期化時に取得した方がよいものがあれば、ご指摘ください。)
+NOTE by S520: The argument is temporary. Please point out if there is something better to get at initialization.
 
 ------
 
 **void Elapse(ElapseDataRoute data, out byte[] sendData)**
 
-この関数は全てのフレームで呼ばれます。路線の現在の状態を車両プラグインに通知し、信号インデックスを設定できます。加えて、車両プラグインへデータを送ることができます。
+This function is called in all frames. It sends the vehicle plug-in of the current state of the route and set the signal index. In addition, it can send data to the vehicle plug-in.
 
-引数:
-
-{{% table-nonheader %}}
-
-| ElapseDataRoute | data     | 本体からプラグインに渡されたデータ     |
-| --------------- | -------- | -------------------------------------- |
-| byte[]          | sendData | 車両プラグインに送るデータを設定する。 |
-
-{{% /table-nonheader %}}
-
-ElapseDataRoute (クラス):
+arguments:
 
 {{% table-nonheader %}}
 
-| Section[] | Sections | 前方の全ての閉塞の情報 |
-| --------- | -------- | ---------------------- |
-|           |          |                        |
+| ElapseDataRoute | data     | Data passed to the plug-in from the OpenBVE. |
+| --------------- | -------- | -------------------------------------------- |
+| byte[]          | sendData | Set data to be sent to the vehicle plug-in.  |
 
 {{% /table-nonheader %}}
 
-Section (構造体)
+ElapseDataRoute (class):
 
 {{% table-nonheader %}}
 
-| SectionAspect[] | Aspects | 各閉塞の全ての信号インデックスの情報 |
-| --------------- | ------- | ------------------------------------ |
-|                 |         |                                      |
+| Section[] | Sections | Information on all blocks ahead. |
+| --------- | -------- | -------------------------------- |
+|           |          |                                  |
 
 {{% /table-nonheader %}}
 
-SectionAspect (構造体)
+Section (struct):
 
 {{% table-nonheader %}}
 
-| int    | Number | 各信号インデックスの数字を取得および設定する。             |
-| ------ | ------ | ---------------------------------------------------------- |
-| double | Speed  | 各信号インデックスに対応する制限速度を取得および設定する。 |
+| SectionAspect[] | Aspects | Information on all signal indices of each block. |
+| --------------- | ------- | ------------------------------------------------ |
+|                 |         |                                                  |
 
 {{% /table-nonheader %}}
 
-(S520注: クラスや構造体のメンバーについては仮のものです。取得可能にした方がよいものがあれば、ご指摘ください。)
+SectionAspect (struct):
+
+{{% table-nonheader %}}
+
+| int    | Number | Get and set the number of each signal index.                 |
+| ------ | ------ | ------------------------------------------------------------ |
+| double | Speed  | Acquires and sets the speed limit corresponding to each signal index. |
+
+{{% /table-nonheader %}}
+
+NOTE by S520: Members of classes and structures are temporary. Please point out if there is something better to make it available.
 
 ------
 
 **void SetBeacon(BeaconDataEx data)**
 
-この関数は車両の先頭がBeacon上を通過する際に呼び出され、Beaconの種類とオプションを設定できます。
+This function is called when the train passes over Beacon and you can set the type and options of Beacon.
 
-引数:
+argument:
 
 {{% table-nonheader %}}
 
-| BeaconDataEx | data | Beaconデータ |
-| ------------ | ---- | ------------ |
-|              |      |              |
+| BeaconDataEx | data | Data of a Beacon |
+| ------------ | ---- | ---------------- |
+|              |      |                  |
 
 {{% /table-nonheader %}}
 
-BeaconDataEx (クラス):
+BeaconDataEx (class):
 
 {{% table-nonheader %}}
 
-| int        | Type     | Beaconの種類を取得および設定する。                       |
-| ---------- | -------- | -------------------------------------------------------- |
-| int        | Optional | Beaconが送信するオプションのデータを取得および設定する。 |
-| SignalData | Signal   | Beaconに紐づけられている閉塞を取得する。                 |
+| int        | Type     | Get and set the type of Beacon.           |
+| ---------- | -------- | ----------------------------------------- |
+| int        | Optional | Get and set optional data sent by Beacon. |
+| SignalData | Signal   | Obtain a block associated with Beacon.    |
 
 {{% /table-nonheader %}}
 
-SignalData (クラス):
+SignalData (class):
 
 {{% table-nonheader %}}
 
-| int    | Aspect   | 閉塞の信号インデックスを取得する。 |
-| ------ | -------- | ---------------------------------- |
-| double | Distance | 閉塞までの距離を取得する。         |
+| int    | Aspect   | Obtain signal indices of block.  |
+| ------ | -------- | -------------------------------- |
+| double | Distance | Obtain the distance to blockage. |
 
 {{% /table-nonheader %}}
 
@@ -241,21 +239,21 @@ SignalData (クラス):
 
 **void Receiver(byte[] receiveData)**
 
-この関数はIRuntimeTrainのイベント *Transmitter* に呼び出されます。車両プラグインからのデータを受け取ることができます。
+This function is called on IRuntimeTrain event Transmitter. You can receive data from the tarin plug-in.
 
 引数:
 
 {{% table-nonheader %}}
 
-| byte[] | recieveData | 車両プラグインから受け取るデータを取得する。 |
-| ------ | ----------- | -------------------------------------------- |
-|        |             |                                              |
+| byte[] | recieveData | Acquire data received from the vehicle plug-in. |
+| ------ | ----------- | ----------------------------------------------- |
+|        |             |                                                 |
 
 {{% /table-nonheader %}}
 
 <br/>
 
-{{% code "実装例" %}}
+{{% code "Implementation example" %}}
 
 ```c#
 using System;
